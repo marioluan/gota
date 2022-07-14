@@ -38,8 +38,11 @@ class _RecipeDuration(BaseModel):
     total_time_millis: Optional[int]
 
 
+RecipeID = UUID
+
+
 class Recipe(_Model):
-    recipe_id: Optional[UUID]
+    recipe_id: Optional[RecipeID]
     dificulty: RecipeDificulty
     author: str
     calories: int
