@@ -1,6 +1,6 @@
-from src.gota.core.api import handler
+from src.gota.core.api import app
 
 
-def test_handler():
-    # Forcing failure to remind me there is no tests.
-    assert handler() is not None
+def test_app():
+    # Failing on purpose to remind me to update this =)
+    assert app is None
