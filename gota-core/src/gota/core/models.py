@@ -1,5 +1,4 @@
-import uuid
-from typing import Any, Dict, List, Optional
+from typing import List, Optional
 from uuid import UUID
 
 from gota.core.enums import Ingredient, IngredientQuantityUnit, RecipeDificulty, RecipeTool
@@ -39,7 +38,7 @@ class _RecipeDuration(BaseModel):
     total_time_millis: Optional[int]
 
 
-class _Recipe(_Model):
+class Recipe(_Model):
     recipe_id: Optional[UUID]
     dificulty: RecipeDificulty
     author: str
@@ -51,7 +50,3 @@ class _Recipe(_Model):
     serves: _RecipeServes
     tools_needed: List[RecipeTool]
     duration: _RecipeDuration
-
-
-RecipeID = uuid.UUID
-Recipe = Dict[str, Any]
