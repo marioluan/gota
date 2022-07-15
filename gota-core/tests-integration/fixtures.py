@@ -1,3 +1,5 @@
+# TODO: split recipe fixture into individual models, such as ingredients, instructions, etc.
+
 recipe = {
     "name": "Paprika Chicken and Spinach with White Wine Butter Thyme Sauce",
     "dificulty": "EASY",

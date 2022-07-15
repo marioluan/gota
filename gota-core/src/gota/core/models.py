@@ -4,6 +4,8 @@ from uuid import UUID
 from gota.core.enums import Ingredient, IngredientQuantityUnit, RecipeDificulty, RecipeTool
 from pydantic import BaseModel
 
+# TODO: add custom validation/constraints to all models below
+
 
 class _Model(BaseModel):
     name: str

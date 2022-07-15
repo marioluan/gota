@@ -67,10 +67,6 @@ to the api.
     docker compose down
     ```
 
-### Code coverage
-
-TBD.
-
 ## Contributing
 
 ### Adding a new python dependency
@@ -92,3 +88,15 @@ TBD.
     ```bash
     pip3 freeze > requirements.txt
     ```
+
+### TODO
+
+-   Add mypy, flake8, black and isort as development dependencies.
+-   Integrate with GitHub actions to enforce running mypy, flake8, black, isort and unit test.
+-   Add code coverage integration.
+-   Generate client for integration tests from openapi spec.
+-   Add middleware for logging and tracing.
+-   Add authentication and autorization.
+-   Integrate with DynamoDB or S3.
+-   Make OpenAPI spec available either from S3 or as part of the api.
+-   Publish service metrics and logs to CloudWatch.

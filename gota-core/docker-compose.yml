@@ -12,11 +12,11 @@ services:
       - "uvicorn"
       - "gota.core.api:app"
       - "--host"
-      # TODO: pass as env var
+      # TODO: get host from env var
       - "0.0.0.0"
       - "--port"
-      # TODO: pass as env var
+      # TODO: get port from env var
       - "8000"
     ports:
-      # TODO: pass as env var
+      # TODO: get port from env var
       - "127.0.0.1:8000:8000"

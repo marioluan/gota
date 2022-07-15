@@ -13,6 +13,9 @@ storage = MemoryStorage()
 repository = RecipeRepository(storage)
 
 
+# XXX
+# This operation was not requested as a requirement.
+# I added it to allow help troubleshooting. If it was part of the requirement I'd have added token-based pagination.
 @app.get("/recipes", response_model=List[Recipe])
 def get_recipes() -> List[Recipe]:
     return repository.get_recipes()

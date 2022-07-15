@@ -13,3 +13,5 @@ COPY "src" "${LAMBDA_TASK_ROOT}"
 
 # lambda handler
 CMD ["gota.core.api.handler"]
+
+# TODO: split this image into: gota-core and gota-core-lambda
