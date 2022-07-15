@@ -57,11 +57,6 @@ export class GotaCdkStack extends Stack {
 
         // Routes
         const recipes = api.root.addResource('recipes')
-        // XXX
-        // This route is not in scope for the project
-        // and I'd remove it if I was deploying this to production.
-        // Since I'm not, I'm keeping it here, because it's handy
-        // for debugging during development.
         recipes.addMethod('GET', integration)
         recipes.addMethod('POST', integration)
 

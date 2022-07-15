@@ -19,9 +19,7 @@ _recipe_app = RecipeApp(
 )
 
 
-# XXX
-# This operation was not requested as a requirement.
-# I added it to allow help troubleshooting. If it was part of the requirement I'd have added token-based pagination.
+# TODO: add filtering to support query by fields other than {recipe_id}
 @app.get("/recipes", response_model=List[Recipe])
 def get_recipes() -> List[Recipe]:
     return _recipe_app.repository.get_recipes()

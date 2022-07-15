@@ -39,9 +39,6 @@ IDEs, run unit and integration tests and spin up a local web server for quick te
 
 ## Testing
 
-There are currently two types of testing setup available: unit and integration. You can find below  
-how to run them:
-
 ### Unit
 
 ```bash
@@ -51,12 +48,12 @@ pytest tests
 ### Integration
 
 These are testing the api contract and the business logic in general. It spins up a web service  
-as a docker container in your local enviroment and uses a vanilla python client to send requests  
-to the api.
+as a docker container in your local enviroment and uses a vanilla python client (`requests`) to  
+send requests to the api.
 
 1. Start the web server:
     ```bash
-    docker compose up -d
+    docker compose up gota-core -d
     ```
 1. Run tests:
     ```bash
@@ -67,9 +64,7 @@ to the api.
     docker compose down
     ```
 
-## Contributing
-
-### Adding a new python dependency
+## Adding a new python dependency
 
 1. Create a virtualenv:
     ```bash
@@ -88,16 +83,3 @@ to the api.
     ```bash
     pip3 freeze > requirements.txt
     ```
-
-### TODO
-
--   Add search capabilities to API.
--   Add mypy, flake8, black and isort as development dependencies.
--   Integrate with GitHub actions to enforce running mypy, flake8, black, isort and unit test.
--   Add code coverage integration.
--   Generate client for integration tests from openapi spec.
--   Add middleware for logging and tracing.
--   Add authentication and autorization.
--   Integrate with DynamoDB or S3.
--   Make OpenAPI spec available either from S3 or as part of the api.
--   Publish service metrics and logs to CloudWatch.
