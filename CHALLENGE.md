@@ -20,7 +20,7 @@ You should share with us a private Git repository that contains:
 -   [x] Instructions on how to run your solution (README).
 -   [] A document (in the format that you prefer) with the diagram and explanation of how to deploy and run your solution in the cloud.
 -   [] You should give access to this repo to the following users (so they can review your solution on the Pull Request): adriantomas, - conor-mooney ,kabute, ruduran, rmunoz, sercantor
--   [] Optional: Provide a containerized solution (e.g. Dockerfile).
+-   [x] Optional: Provide a containerized solution (e.g. Dockerfile).
 
 ### Considerations
 
