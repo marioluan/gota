@@ -28,3 +28,4 @@ Go to gota-cdk and check the `Deploy > Local > Build & Run` section in its READM
 -   Add performance tests and integrate with CI/CD to capture regression.
 -   Add smoke tests and integrate with CI/CD to validate deployments.
 -   Add canaries to produce traffic.
+-   Add indexes to DynamoDB and implement search in the API.

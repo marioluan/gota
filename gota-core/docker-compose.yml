@@ -16,7 +16,24 @@ services:
       - "0.0.0.0"
       - "--port"
       # TODO: get port from env var
-      - "8000"
+      - "8080"
     ports:
       # TODO: get port from env var
+      - "127.0.0.1:8080:8080"
+    networks:
+      - sam-local
+  dynamodb-local:
+    command: "-jar DynamoDBLocal.jar -sharedDb -dbPath ./data"
+    image: "amazon/dynamodb-local:latest"
+    container_name: dynamodb-local
+    ports:
+      # this is the default in dynamodb.jar. Best to keep as-is.
       - "127.0.0.1:8000:8000"
+    volumes:
+      - "./docker/dynamodb:/home/dynamodblocal/data"
+    working_dir: /home/dynamodblocal
+    networks:
+      - sam-local
+networks:
+  sam-local:
+    name: sam-local

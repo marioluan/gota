@@ -91,6 +91,7 @@ to the api.
 
 ### TODO
 
+-   Add search capabilities to API.
 -   Add mypy, flake8, black and isort as development dependencies.
 -   Integrate with GitHub actions to enforce running mypy, flake8, black, isort and unit test.
 -   Add code coverage integration.

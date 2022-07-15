@@ -1,5 +1,4 @@
 from typing import List, Optional
-from uuid import UUID
 
 from gota.core.enums import Ingredient, IngredientQuantityUnit, RecipeDificulty, RecipeTool
 from pydantic import BaseModel
@@ -40,7 +39,8 @@ class _RecipeDuration(BaseModel):
     total_time_millis: Optional[int]
 
 
-RecipeID = UUID
+# TODO: add uuid validation or use uuid.UUID and create an encoder
+RecipeID = str
 
 
 class Recipe(_Model):

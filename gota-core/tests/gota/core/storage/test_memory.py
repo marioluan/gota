@@ -8,7 +8,7 @@ from src.gota.core.storage.types import StorageItem, StorageItemID
 
 @fixture
 def item_id() -> StorageItemID:
-    return uuid.uuid4()
+    return str(uuid.uuid4())
 
 
 @fixture
@@ -50,4 +50,4 @@ def test_get_item_when_present(storage: IStorage, item_id: StorageItemID, item: 
 
 def test_get_item_when_absent(storage: IStorage, item_id: StorageItemID, item: StorageItem):
     storage.save_item(item_id=item_id, item=item)
-    assert storage.get_item(item_id=uuid.uuid4()) != item
+    assert storage.get_item(item_id=str(uuid.uuid4())) != item

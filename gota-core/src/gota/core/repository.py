@@ -24,7 +24,7 @@ class RecipeRepository:
 
         :return: all recipes from repository
         """
-        return self._storage.get_items()
+        return [Recipe(**item) for item in self._storage.get_items()]
 
     def get_recipe(self, recipe_id: RecipeID) -> Union[Recipe, RecipeNotFoundError]:
         """
@@ -34,10 +34,10 @@ class RecipeRepository:
         :raises RecipeNotFoundError: if recipe wasn't found
         :return: the recipe found
         """
-        recipe = self._storage.get_item(recipe_id)
-        if not recipe:
+        item = self._storage.get_item(recipe_id)
+        if not item:
             raise RecipeNotFoundError()
-        return recipe
+        return Recipe(**item)
 
     def save_recipe(self, recipe: Recipe) -> Recipe:
         """
@@ -47,11 +47,11 @@ class RecipeRepository:
         :return: the saved recipe (with auto-generated fields)
         """
         # auto-generated
-        recipe.recipe_id = uuid.uuid4()
+        recipe.recipe_id = str(uuid.uuid4())
         recipe.created_at_millis = datetime_to_milliseconds(arrow.utcnow())
         self._update_duration_total_time_millis(recipe)
 
-        self._storage.save_item(item_id=recipe.recipe_id, item=recipe)
+        self._storage.save_item(item_id=recipe.recipe_id, item=recipe.dict())
 
         return recipe
 
@@ -76,6 +76,6 @@ class RecipeRepository:
         recipe.updated_at_millis = datetime_to_milliseconds(arrow.utcnow())
         self._update_duration_total_time_millis(recipe)
 
-        self._storage.save_item(item_id=recipe_id, item=recipe)
+        self._storage.save_item(item_id=recipe_id, item=recipe.dict())
 
         return None

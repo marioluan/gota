@@ -11,7 +11,7 @@ from fixtures import recipe
 # TODO: spin up the server, run tests and shutdown programatically
 # TODO: set address, port and root path dynamically.
 
-_PORT = 8000
+_PORT = 8080
 _API_URL = f"http://localhost:{_PORT}/recipes"
 
 
@@ -55,7 +55,7 @@ def test_get_recipe_not_found(recipe_copy):
     requests.post(_API_URL, json=recipe_copy)
 
     # attempt to get recipe
-    recipe_id = uuid.uuid4()
+    recipe_id = str(uuid.uuid4())
     response = requests.get(f"{_API_URL}/{recipe_id}")
 
     # TODO: assert body and headers
@@ -94,7 +94,7 @@ def test_update_recipe_not_found(recipe_copy):
     requests.post(_API_URL, json=recipe_copy)
 
     # attempt to update recipe
-    put_recipe_id = uuid.uuid4()
+    put_recipe_id = str(uuid.uuid4())
     put_response = requests.put(f"{_API_URL}/{put_recipe_id}", json=recipe_copy)
 
     # TODO: assert body and headers

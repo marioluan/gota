@@ -10,12 +10,12 @@ recipe = {
         {
             "ingredient": "FRESH_THYME",
             "preparation_kind": "destalked",
-            "quantity": {"value": 10, "scale": "G"},
+            "quantity": {"value": 10, "unit": "G"},
         },
         {
             "ingredient": "GARLIC_CLOVE",
             "preparation_kind": "destalked",
-            "quantity": {"value": 3, "scale": "MINCED"},
+            "quantity": {"value": 3, "unit": "KG"},
         },
     ],
     "instructions": [

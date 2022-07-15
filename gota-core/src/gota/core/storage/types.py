@@ -1,5 +1,4 @@
-import uuid
-from typing import Any
+from typing import Any, Dict
 
-StorageItem = Any
-StorageItemID = uuid.UUID
+StorageItem = Dict[str, Any]
+StorageItemID = str
