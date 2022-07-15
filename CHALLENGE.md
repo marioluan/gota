@@ -27,7 +27,7 @@ You should share with us a private Git repository that contains:
 -   [x] Programming Languages: Python or Go are recommended.
 -   [x] You can choose what Schema definitions and data structures to use.
 -   [x] You can choose any storage/persistence that you consider.
--   [] Standard specifications (e.g. OpenAPI) are optional but encouraged.
+-   [x] Standard specifications (e.g. OpenAPI) are optional but encouraged.
 
 ### Recipe Format
 

@@ -83,3 +83,8 @@ send requests to the api.
     ```bash
     pip3 freeze > requirements.txt
     ```
+
+## Accessing the OpenAPI spec
+
+JSON spec: http://localhost:8080/openapi.json
+Interactive console: http://localhost:8080/docs
