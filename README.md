@@ -25,6 +25,7 @@ Go to `gota-cdk` and check the `Deploy > Local > Build & Run` section in its REA
 -   [Feature] Add thumbnails to recipes.
 -   [Feature] Create a lightweight client to query the API.
 -   [Feature] Expose gota-core openapi spec.
+-   [Feature] Add custom validation to models, such as min, max, etc.
 -   [CI/CD] Add CI/CD pipeline.
 -   [CI/CD] Add performance tests and run them as part of CI/CD.
 -   [CI/CD] Add smoke tests and run them as part of CI/CD.
