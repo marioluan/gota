@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+  gota-core:
+    image: gota-core
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    entrypoint:
+      - "python3"
+      - "-m"
+      - "uvicorn"
+      - "gota.core.api:app"
+      - "--host"
+      # TODO: pass as env var
+      - "0.0.0.0"
+      - "--port"
+      # TODO: pass as env var
+      - "8000"
+    ports:
+      # TODO: pass as env var
+      - "127.0.0.1:8000:8000"

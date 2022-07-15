@@ -14,6 +14,7 @@ The steps below should help you get started.
 
 -   package manager: pip
 -   runtime: python3
+-   container: docker
 
 ### Environment setup
 
@@ -49,19 +50,22 @@ pytest tests
 
 ### Integration
 
-These are testing the api contract and the business logic in general. It's using a vanilla python  
-client, but I have plans to use one generated from the api spec (openapi).
+These are testing the api contract and the business logic in general. It spins up a web service  
+as a docker container in your local enviroment and uses a vanilla python client to send requests  
+to the api.
 
 1. Start the web server:
     ```bash
-    uvicorn gota.core.api:app --reload
+    docker compose up -d
     ```
 1. Run tests:
     ```bash
     pytest tests-integration
     ```
-
-Note: you will need to start both processes separately.
+1. Stop the web server:
+    ```bash
+    docker compose down
+    ```
 
 ### Code coverage
 
@@ -69,4 +73,22 @@ TBD.
 
 ## Contributing
 
-TBD.
+### Adding a new python dependency
+
+1. Create a virtualenv:
+    ```bash
+    python3 -m venv env
+    . env/bin/activate
+    ```
+1. Install the dependency:
+    ```bash
+    pip3 install "{dependency}"
+    ```
+1. Remove gota-core from the dependency tree (which is only used for development):
+    ```bash
+    pip3 uninstall gota
+    ```
+1. Update requirements.txt:
+    ```bash
+    pip3 freeze > requirements.txt
+    ```
