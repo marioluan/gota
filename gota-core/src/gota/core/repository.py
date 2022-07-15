@@ -78,4 +78,4 @@ class RecipeRepository:
 
         self._storage.save_item(item_id=recipe_id, item=recipe)
 
-        return recipe
+        return None

@@ -1,17 +1,24 @@
 # gota-core
 
-Core library which handles api requests to create, read and update recipes.
+Core library which implements an API to create, read and update recipes.
+
+## Deployment mode: ASGI Web Server
+
+The API is powered by [FastAPI](https://github.com/tiangolo/fastapi) and backed by [uvicorn ASGI web server](https://www.uvicorn.org/).
 
 ## Development
+
+The steps below should help you get started.
 
 **Pre-requisite**
 
 -   package manager: pip
 -   runtime: python3
--   test runner: pytest
--   web server: uvicorn
 
 ### Environment setup
+
+Follow the steps below to prepare your local python environment, which will allow integration with  
+IDEs, run unit and integration tests and spin up a local web server for quick testing.
 
 1. Create a virtualenv:
     ```bash
@@ -26,17 +33,40 @@ Core library which handles api requests to create, read and update recipes.
     ```bash
     pip install -r requirements.txt && pip install -e .
     ```
+1. That's it. You're ready to integrate your IDE, make code changes, test and spin up the web  
+   server.
 
-### Testing
+## Testing
+
+There are currently two types of testing setup available: unit and integration. You can find below  
+how to run them:
+
+### Unit
 
 ```bash
-pytest
+pytest tests
 ```
 
-## Run a standalone API
+### Integration
+
+These are testing the api contract and the business logic in general. It's using a vanilla python  
+client, but I have plans to use one generated from the api spec (openapi).
 
 1. Start the web server:
     ```bash
     uvicorn gota.core.api:app --reload
     ```
-1. Interact with it: http://127.0.0.1:8000/recipes
+1. Run tests:
+    ```bash
+    pytest tests-integration
+    ```
+
+Note: you will need to start both processes separately.
+
+### Code coverage
+
+TBD.
+
+## Contributing
+
+TBD.
