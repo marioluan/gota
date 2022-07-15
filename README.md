@@ -17,4 +17,4 @@ Go to gota-core and check the `Testing > Integration` section in its README.md f
 
 ### Emulated aws environment
 
-Coming soon...
+Go to gota-cdk and check the `Deploy > Local > Build & Run` section in its README.md file.

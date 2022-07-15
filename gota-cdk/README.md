@@ -1,14 +1,44 @@
-# Welcome to your CDK TypeScript project
+# gota-cdk
 
-This is a blank project for CDK development with TypeScript.
+Infrastructure management for `gota-core`.
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+**Pre-requisites**
 
-## Useful commands
+-   serverless deployment: [aws sam cli](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install-mac.html)
+-   infrastructure management: [aws cdk](https://docs.aws.amazon.com/cdk/v2/guide/cli.html)
+-   container: [docker](https://docs.docker.com/get-docker/)
 
--   `npm run build` compile typescript to js
--   `npm run watch` watch for changes and compile
--   `npm run test` perform the jest unit tests
--   `cdk deploy` deploy this stack to your default AWS account/region
--   `cdk diff` compare deployed stack with current state
--   `cdk synth` emits the synthesized CloudFormation template
+## Deploy
+
+### Production
+
+Coming soon...
+
+### Local
+
+We use `sam local` to [start a local instance of API Gateway](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-start-api.html) and integrate with our Lambdas.
+
+#### Build & Run
+
+1. Generate cloudformation template:
+
+    ```bash
+    cdk synth --no-staging > template.yaml
+    ```
+
+1. Build a docker image with the stack(s) from the cloudformation template:
+    ```bash
+    sam build
+    ```
+1. Spin up an API Gateway and Lambda integrated with gota API:
+    ```bash
+    sam local start-api --warm-containers LAZY --port 8000
+    ```
+
+##### Test
+
+Go to go-core package and execute integration tests:
+
+```bash
+pytest tests-integration
+```
