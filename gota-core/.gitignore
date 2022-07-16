@@ -53,3 +53,9 @@ env/
 .venv*/
 .conda*/
 .python-version
+
+# from docker-compose.yml (dynamodb tables)
+docker/dynamodb/shared-local-instance.db
+
+# from 'cdk synth --no-staging > "template.yaml"'
+template.yaml
