@@ -31,6 +31,31 @@ cdk diff
 cdk deploy
 ```
 
+#### Test
+
+You can run integration tests against the production API:
+
+1. Create a new user in Cognito and note down the client_id, username, password, user_pool_id and region.
+1. Go to API gateway and note down the URL for the API.
+1. Go to gota-core and run integration tests.
+
+    ```bash
+    # Except API_STAGE, you need to fill the env vars below with the information you noted
+    # from previous steps
+    API_STAGE="prod" \
+    API_URL="https://w8aznnzdca.execute-api.us-east-1.amazonaws.com/prod" \
+    AUTH_CLIENT_ID="2t9353o636v6lenl3ro9vpgpde" \
+    AUTH_PASSWORD="Summer@12345" \
+    AUTH_USER_POOL_ID="us-east-1_EJUZo84J0" \
+    AUTH_USER_POOL_REGION="us-east-1" \
+    AUTH_USERNAME="customer" \
+        pytest tests-integration
+    ```
+
+#### Useful commands
+
+https://docs.aws.amazon.com/cdk/v2/guide/cli.html#cli-commands
+
 ### Local
 
 We use `sam local` to [start a local instance of API Gateway](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-start-api.html) and integrate with our Lambda. The steps below will deploy  

@@ -1,5 +1,6 @@
 import { Duration, Stack, StackProps } from 'aws-cdk-lib'
 import * as apigateway from 'aws-cdk-lib/aws-apigateway'
+import * as cognito from 'aws-cdk-lib/aws-cognito'
 import * as dynamodb from 'aws-cdk-lib/aws-dynamodb'
 import * as lambda from 'aws-cdk-lib/aws-lambda'
 import { Construct } from 'constructs'
@@ -17,26 +18,50 @@ export class GotaCdkStack extends Stack {
     constructor(scope: Construct, id: string, props?: StackProps) {
         super(scope, id, props)
 
-        // NOTE
-        // sam local doesn't spin a local dynamodb server, so this definition here won't be taken
-        // into account when starting a local sam api. Take a look at the README to see how
-        // dynamodb is being created locally and used by sam local api.
-        const TABLE_NAME = 'Recipes'
+        // Storage
         const PARTITION_KEY = 'recipe_id'
-        new dynamodb.Table(this, 'Table', {
-            tableName: TABLE_NAME,
+        const storage = new dynamodb.Table(this, 'Table', {
+            // NOTE
+            // sam local doesn't spin a local dynamodb server, so this definition here won't be taken
+            // into account when starting a local sam api. Take a look at the README to see how
+            // dynamodb is being created locally and used by sam local api.
+            tableName: 'Recipes',
             partitionKey: { name: PARTITION_KEY, type: dynamodb.AttributeType.STRING },
             // TODO: Add secondary indexes for searching
         })
 
-        // API
-        const api = new apigateway.RestApi(this, 'Api', {
-            restApiName: 'Recipes Service',
-            description: 'This service manages recipes.',
+        // Auth
+        const userPool = new cognito.UserPool(this, 'UserPool', { userPoolName: 'Gota' })
+        const authorizer = new apigateway.CognitoUserPoolsAuthorizer(
+            this,
+            'CognitoUserPoolsAuthorizer',
+            {
+                cognitoUserPools: [userPool],
+            }
+        )
+        new cognito.UserPoolClient(this, 'UserPoolClient', {
+            userPool,
+            authFlows: {
+                adminUserPassword: true,
+                userPassword: true,
+                custom: true,
+                userSrp: true,
+            },
+            supportedIdentityProviders: [cognito.UserPoolClientIdentityProvider.COGNITO],
         })
 
-        // Request handler
-        const handler = new lambda.DockerImageFunction(this, 'RequestHandler', {
+        // ReverseProxy
+        const api = new apigateway.RestApi(this, 'RestApi', {
+            restApiName: 'Recipes Service',
+            description: 'This service manages recipes.',
+            defaultMethodOptions: {
+                authorizer: authorizer,
+                authorizationType: apigateway.AuthorizationType.COGNITO,
+            },
+        })
+
+        // RequestHandler
+        const handler = new lambda.DockerImageFunction(this, 'DockerImageFunction', {
             code: lambda.DockerImageCode.fromImageAsset(GotaCdkStack.DOCKER_FILE_ROOT),
             // XXX
             // Only reason is the fact the image is built in a mac

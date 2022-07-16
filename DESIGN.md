@@ -11,7 +11,7 @@ Deploy a REST API that can manage recipes.
 ### Requirements
 
 1.  [x] Support to create, retrieve and modify a recipe.
-1.  [ ] Optional: Add some kind of authentication (e.g. token).
+1.  [x] Optional: Add some kind of authentication (e.g. token).
 1.  [ ] Optional: Create a lightweight client to query the API.
 1.  [x] Optional: Provide a containerized solution (e.g. Dockerfile).
 1.  [x] Deliver a diagram and explanation of how to deploy and run the solution in the AWS.
