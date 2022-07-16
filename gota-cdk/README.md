@@ -121,7 +121,9 @@ api is working as expected (or play with it as you wish):
 
 ```bash
 cd ../gota-core
-pytest tests-integration
+API_URL="http://localhost:8080" \
+API_STAGE="local" \
+    pytest tests-integration
 ```
 
 #### Clean up
@@ -141,5 +143,6 @@ pytest tests-integration
 1. Delete the local DynamoDB:
     ```bash
     cd ../gota-core
-    docker compose down "dynamodb-local"
+    docker compose stop "dynamodb-local"
+    docker compose down
     ```

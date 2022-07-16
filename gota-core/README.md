@@ -68,11 +68,13 @@ send requests to the api.
     ```
 1. Run tests:
     ```bash
-    pytest tests-integration
+    API_URL="http://localhost:8080" \
+    API_STAGE="local" \
+        pytest tests-integration
     ```
 1. Stop the web server:
     ```bash
-    docker compose down
+    docker compose stop gota-core
     ```
 
 ## Adding a new python dependency
