@@ -3,6 +3,7 @@ version: '3.4'
 services:
   gota-core:
     image: gota-core
+    container_name: gota_core
     build:
       context: .
       dockerfile: ./Dockerfile
@@ -34,6 +35,14 @@ services:
     volumes:
       - "./docker/dynamodb:/home/dynamodblocal/data"
     working_dir: /home/dynamodblocal
+    networks:
+      - sam-local
+  gota-core-client-generator:
+    command: generate -g python -o /local/gota-core-client -i http://gota-core:8080/openapi.json
+    image: openapitools/openapi-generator-cli
+    container_name: client_generator
+    volumes:
+      - ..:/local
     networks:
       - sam-local
 networks:

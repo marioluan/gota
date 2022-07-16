@@ -101,3 +101,13 @@ send requests to the api.
 
 JSON spec: http://localhost:8080/openapi.json  
 Interactive console: http://localhost:8080/docs
+
+## Clients
+
+To update the client, simply run the command below:
+
+```bash
+docker compose run gota-core-client-generator
+```
+
+The client in gota-core-client will be updated with the new code.

@@ -12,7 +12,7 @@ Deploy a REST API that can manage recipes.
 
 1.  [x] Support to create, retrieve and modify a recipe.
 1.  [x] Optional: Add some kind of authentication (e.g. token).
-1.  [ ] Optional: Create a lightweight client to query the API.
+1.  [x] Optional: Create a lightweight client to query the API.
 1.  [x] Optional: Provide a containerized solution (e.g. Dockerfile).
 1.  [x] Deliver a diagram and explanation of how to deploy and run the solution in the AWS.
 
@@ -140,7 +140,6 @@ If I had more time, I'd implement the following before calling it production-rea
 -   Functionality
     -   Add support to query recipes by fields other than id.
     -   Add thumbnails to recipes.
-    -   Create a lightweight client to query the API.
     -   Add custom validation to models, such as min, max, etc.
     -   Expose OpenAPI specification in API Gateway.
 -   Development

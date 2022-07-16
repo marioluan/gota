@@ -6,6 +6,7 @@ Gota, an API for recipes powered by AWS and FastAPI.
 
 -   gota-cdk: infrastructure management and deployment.
 -   gota-core: core library which implements an api to create, read and update a recipe.
+-   gota-core-client: client library for gota-core.
 
 ## Deploy
 
@@ -22,3 +23,7 @@ Go to `gota-core` and check the `Deployment modes > Local ASGI Web Service` sect
 ### AWS Stack
 
 Go to `gota-cdk` and check the `Deploy > Local` section in its README.md file.
+
+## Auto-generated Client
+
+Go to `gota-core-client` and check the README.md to see how to use it.
