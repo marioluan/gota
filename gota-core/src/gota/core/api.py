@@ -7,10 +7,13 @@ from gota.core.errors import RecipeNotFoundError
 from gota.core.models import Recipe
 from mangum import Mangum
 
-app = FastAPI()
+# this spins up the API
+# root_path is usually present when deployed to aws/api gateway
+app = FastAPI(root_path=environ.get("API_ROOT_PATH", ""))
 
 _recipe_app = RecipeApp(
     is_sam_local=environ.get("AWS_SAM_LOCAL"),
+    is_local=environ.get("APP_LOCAL"),
     dynamodb_settings=DynamoDBSettings(
         table_name=environ.get("DYNAMODB_TABLE_NAME"),
         partition_key=environ.get("DYNAMODB_PARTITION_KEY"),
@@ -52,4 +55,5 @@ def create_recipe(recipe: Recipe) -> Recipe:
     return _recipe_app.repository.save_recipe(recipe)
 
 
+# this adapts the api to work in aws
 handler = Mangum(app)
