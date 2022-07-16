@@ -13,9 +13,7 @@ Infrastructure management for `gota-core`.
 
 ### Production
 
-Ideally, I'd create a CI/CD pipeline in AWS, but for the sake of time, I decided to use vanilla
-cdk to deploy. Also, it will deploy and use the default API Gateway url - but I'd use a DNS/Route53  
-instead.
+Ideally, I'd create a CI/CD pipeline in AWS, but for the sake of time, I decided to use vanilla cdk to deploy. Also, it will deploy and use the default API Gateway url - but I'd use a DNS/Route53 instead.
 
 **Pre-requisite**
 Valid aws credentials.
@@ -58,11 +56,9 @@ https://docs.aws.amazon.com/cdk/v2/guide/cli.html#cli-commands
 
 ### Local
 
-We use `sam local` to [start a local instance of API Gateway](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-start-api.html) and integrate with our Lambda. The steps below will deploy  
-docker containers locally with an in-memory DynamoDB, API Gateway and Lambda.
+We use `sam local` to [start a local instance of API Gateway](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-start-api.html) and integrate with our Lambda. The steps below will deploy docker containers locally with an in-memory DynamoDB, API Gateway and Lambda.
 
-> Read [this blog post](https://medium.com/@mahesh_61440/using-aws-cdk-to-quickly-create-a-proof-of-concept-dca2696fad77)  
-> to understand the integration between cdk and sam.
+> Read [this blog post](https://medium.com/@mahesh_61440/using-aws-cdk-to-quickly-create-a-proof-of-concept-dca2696fad77) to understand the integration between cdk and sam.
 
 1. Start a local DynamoDB server:
 
@@ -116,8 +112,7 @@ docker containers locally with an in-memory DynamoDB, API Gateway and Lambda.
 
 #### Test
 
-Now that the service is up and running, you can execute the command below to validate the
-api is working as expected (or play with it as you wish):
+Now that the service is up and running, you can execute the command below to validate the api is working as expected (or play with it as you wish):
 
 ```bash
 cd ../gota-core

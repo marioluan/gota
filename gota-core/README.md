@@ -4,10 +4,7 @@ Core library which implements an API to create, read and update recipes.
 
 ## Deployment modes
 
-The API is powered by [FastAPI](https://github.com/tiangolo/fastapi). It supports OpenAPI and  
-can generate clients from the specification. Lastly, it supports many authentication mechanisms, such as JTW.  
-[Uvicorn](https://www.uvicorn.org/) is used to spin up a standalone web server (quite useful in tests).  
-To integrate with AWS, I'm using [Mangum](https://mangum.io/asgi-frameworks/) adapter.
+The API is powered by [FastAPI](https://github.com/tiangolo/fastapi). It supports OpenAPI and can generate clients from the specification. Lastly, it supports many authentication mechanisms, such as JTW. [Uvicorn](https://www.uvicorn.org/) is used to spin up a standalone web server (quite useful in tests). To integrate with AWS, I'm using [Mangum](https://mangum.io/asgi-frameworks/) adapter.
 
 ### Local ASGI Web Server
 
@@ -29,8 +26,7 @@ Go to `gota-cdk` and check the `Deploy > Local` section in its README.md file.
 
 ### Environment setup
 
-Follow the steps below to prepare your local python environment, which will allow integration with  
-IDEs, run unit and integration tests and spin up a local web server for quick testing.
+Follow the steps below to prepare your local python environment, which will allow integration with IDEs, run unit and integration tests and spin up a local web server for quick testing.
 
 1. Create a virtualenv:
     ```bash
@@ -45,8 +41,7 @@ IDEs, run unit and integration tests and spin up a local web server for quick te
     ```bash
     pip install -r requirements.txt && pip install -e .
     ```
-1. That's it. You're ready to integrate your IDE, make code changes, test and spin up the web  
-   server.
+1. That's it. You're ready to integrate your IDE, make code changes, test and spin up the web server.
 
 ## Testing
 
@@ -58,9 +53,7 @@ pytest tests
 
 ### Integration
 
-These are testing the api contract and the business logic in general. It spins up a web service  
-as a docker container in your local enviroment and uses a vanilla python client (`requests`) to  
-send requests to the api.
+These are testing the api contract and the business logic in general. It spins up a web service as a docker container in your local enviroment and uses a vanilla python client (`requests`) to send requests to the api.
 
 1. Start the web server:
     ```bash
