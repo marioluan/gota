@@ -21,9 +21,9 @@ export class GotaCdkStack extends Stack {
         // sam local doesn't spin a local dynamodb server, so this definition here won't be taken
         // into account when starting a local sam api. Take a look at the README to see how
         // dynamodb is being created locally and used by sam local api.
-        const TABLE_NAME = 'Recipe'
+        const TABLE_NAME = 'Recipes'
         const PARTITION_KEY = 'recipe_id'
-        const table = new dynamodb.Table(this, 'Table', {
+        new dynamodb.Table(this, 'Table', {
             tableName: TABLE_NAME,
             partitionKey: { name: PARTITION_KEY, type: dynamodb.AttributeType.STRING },
             // TODO: Add secondary indexes for searching
