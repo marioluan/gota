@@ -38,9 +38,17 @@ export class GotaCdkStack extends Stack {
         // Request handler
         const handler = new lambda.DockerImageFunction(this, 'RequestHandler', {
             code: lambda.DockerImageCode.fromImageAsset(GotaCdkStack.DOCKER_FILE_ROOT),
+            // XXX
+            // Only reason is the fact the image is built in a mac
+            // It's best to upload the code as part of the deployment, and build the image in
+            // aws itself. See https://github.com/aws/aws-lambda-base-images/issues/26
+            architecture: process.env.AWS_SAM_LOCAL
+                ? lambda.Architecture.X86_64
+                : lambda.Architecture.ARM_64,
             environment: {
                 DYNAMODB_TABLE_NAME: TABLE_NAME,
                 DYNAMODB_PARTITION_KEY: PARTITION_KEY,
+                API_ROOT_PATH: 'prod',
                 // Passing this here, so that sam local can override it and point to a local
                 // dynamodb server
                 DYNAMODB_ENDPOINT_URL: '',
@@ -58,6 +66,10 @@ export class GotaCdkStack extends Stack {
                 'application/json': JSON.stringify({ statusCode: '200' }),
             },
         })
+
+        // TODO: fix the route below. For some reason it isn't rendering the openapi console.
+        // const docs = api.root.addResource('docs')
+        // docs.addMethod('GET', integration)
 
         // Routes
         const recipes = api.root.addResource('recipes')
