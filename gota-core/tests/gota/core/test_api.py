@@ -1,7 +1,9 @@
 import pytest
+from pytest import MonkeyPatch
 
 
-def test_importable():
+def test_importable(monkeypatch: MonkeyPatch):
+    monkeypatch.setenv("APP_LOCAL", True)
     from src.gota.core.api import app  # noqa
 
 
