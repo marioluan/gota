@@ -71,25 +71,26 @@ export class GotaCdkStack extends Stack {
                 ? lambda.Architecture.X86_64
                 : lambda.Architecture.ARM_64,
             environment: {
-                DYNAMODB_TABLE_NAME: TABLE_NAME,
+                DYNAMODB_TABLE_NAME: storage.tableName,
                 DYNAMODB_PARTITION_KEY: PARTITION_KEY,
                 API_ROOT_PATH: 'prod',
                 // Passing this here, so that sam local can override it and point to a local
-                // dynamodb server
+                // dynamodb server during development.
                 DYNAMODB_ENDPOINT_URL: '',
             },
-            // Each request should respond within under a second.
-            // Setting it to 10 seconds (which is the timeout for creating Lambda
-            // Sandboxes (when the container is launched for the first time) - aka cold invokes.
+            // Each request should respond within under a second; However, the very first invocation
+            // (cold invoke) can take up to 10 seconds. For this reason, I'm setting this for 10
+            // seconds for now. This is only necessary with on-demand capacity during scaling.
             timeout: Duration.seconds(10),
         })
+
+        // Grant RequestHandler read/write permissions on Storage
+        storage.grantReadWriteData(handler)
 
         // Integration between Api Gateway and gota-core's handlers
         const integration = new apigateway.LambdaIntegration(handler, {
             // https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html
-            requestTemplates: {
-                'application/json': JSON.stringify({ statusCode: '200' }),
-            },
+            requestTemplates: { 'application/json': JSON.stringify({ statusCode: '200' }) },
         })
 
         // TODO: fix the route below. For some reason it isn't rendering the openapi console.
