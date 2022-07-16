@@ -13,6 +13,10 @@ Infrastructure management for `gota-core`.
 
 ### Production
 
+Ideally, I'd create a CI/CD pipeline in AWS, but for the sake of time, I decided to use vanilla
+cdk to deploy. Also, it will deploy and use the default API Gateway url - but I'd use a DNS/Route53  
+instead.
+
 **Pre-requisite**
 Valid aws credentials.
 

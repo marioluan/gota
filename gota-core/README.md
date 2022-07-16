@@ -17,15 +17,15 @@ docker compose up gota-core -d
 
 ### Local AWS Stack
 
-Follow `Deploy -> Local -> Build & Run` in gota-cdk's README.md.
+Go to `gota-cdk` and check the `Deploy > Local` section in its README.md file.
 
 ## Development
 
 **Pre-requisite**
 
--   package manager: pip
--   runtime: python3
--   container: docker
+-   [pip](https://github.com/pypa/pip)
+-   [python3](https://www.python.org/downloads/)
+-   [docker](https://docs.docker.com/get-docker/)
 
 ### Environment setup
 
@@ -97,5 +97,5 @@ send requests to the api.
 
 ## Accessing the OpenAPI spec
 
-JSON spec: http://localhost:8080/openapi.json
+JSON spec: http://localhost:8080/openapi.json  
 Interactive console: http://localhost:8080/docs

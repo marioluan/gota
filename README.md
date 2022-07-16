@@ -17,8 +17,8 @@ There are two ways to run the api locally: via an ASGI web service or a local aw
 
 ### ASGI Web Service
 
-Go to `gota-core` and check the `Testing > Integration` section in its README.md file.
+Go to `gota-core` and check the `Deployment modes > Local ASGI Web Service` section in its README.md file.
 
-### AWS Environment
+### AWS Stack
 
-Go to `gota-cdk` and check the `Deploy > Local > Build & Run` section in its README.md file.
+Go to `gota-cdk` and check the `Deploy > Local` section in its README.md file.
