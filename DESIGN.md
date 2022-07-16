@@ -71,7 +71,8 @@ infrastructure as code and the Core package contains the business logic for the 
 The CDK package is in TypeScript because I've never written CDK with Python before - I could,  
 but given this is for an interview, I'm optimizing for coding speed. I've chosen Python for the  
 Core package because I'm faster writing Python code and the performance isn't a concern, as per  
-requirements. If it was, I'd have chosen Go AFTER running performance tests.
+requirements. If it was, I'd have chosen Go AFTER running performance tests against the API with  
+both Python and Go - maybe Python would be fast enough.
 
 ### Frameworks
 
