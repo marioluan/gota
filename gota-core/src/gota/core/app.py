@@ -16,21 +16,29 @@ DynamoDBSettings = NamedTuple(
 
 
 class RecipeApp:
+    """
+    Handles initialization of the application, such as
+    dynamodb client.
+    """
+
     def __init__(
         self,
         is_sam_local: bool,
+        is_local: bool,
         dynamodb_settings: DynamoDBSettings,
     ):
         self.repository: RecipeRepository = self._set_up_repository(
-            is_sam_local,
-            dynamodb_settings.table_name,
-            dynamodb_settings.partition_key,
-            dynamodb_settings.endpoint_url,
+            is_sam_local=is_sam_local,
+            is_local=is_local,
+            dynamodb_table_name=dynamodb_settings.table_name,
+            dynamodb_partition_key=dynamodb_settings.partition_key,
+            dynamodb_endpoint_url=dynamodb_settings.endpoint_url,
         )
 
     @staticmethod
     def _set_up_repository(
         is_sam_local: bool,
+        is_local: bool,
         dynamodb_table_name: str,
         dynamodb_partition_key: str,
         dynamodb_endpoint_url: str,
@@ -43,10 +51,11 @@ class RecipeApp:
                 partition_key=dynamodb_partition_key,
                 endpoint_url=dynamodb_endpoint_url,
             )
-        else:
-            # XXX
-            # Once we deploy the app to production, this will be replaced by the production
-            # dynamodb
+        elif is_local:
             storage = MemoryStorage()
+        else:
+            storage = DynamoDBStorage(
+                table_name=dynamodb_table_name, partition_key=dynamodb_partition_key
+            )
 
         return RecipeRepository(storage)
