@@ -6,14 +6,14 @@ actor Customer
 
 Customer -> Auth: authenticate
 Auth --> Customer: token
-Customer -> ReverseProxy: GET /recipes/{recipe_id}
+Customer -> ReverseProxy: create, read, update recipe
 ReverseProxy -> Auth: validate token
 Auth --> ReverseProxy: token is valid
 ReverseProxy -> RequestHandler: invoke
 database Storage
-RequestHandler -> Storage: read recipe
-Storage --> RequestHandler: recipe
-RequestHandler --> ReverseProxy: recipe
-ReverseProxy --> Customer: recipe
+RequestHandler -> Storage: read, write recipe
+Storage --> RequestHandler: ok
+RequestHandler --> ReverseProxy: ok
+ReverseProxy --> Customer: ok
 
 @enduml

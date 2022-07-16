@@ -27,13 +27,11 @@ Deploy a REST API that can manage recipes.
 
 ### Evaluation Criteria
 
-1. the code is working.
-1. code quality.
-1. scalability of the solution.
+1. The code is working.
+1. Code quality.
+1. Scalability of the solution.
 
 ## Solution
-
-### Architecture
 
 ![high-level-architecture](doc/diagrams/system-architecture/high-level_architecture.png)
 
@@ -55,10 +53,38 @@ Deploy a REST API that can manage recipes.
     dashboard is created during deployment-time with key metrics and logs, plus monitors to track  
     availability and latency.
 
-### Request-Response
+### Workflow
 
-Below is a sequence flow to get a recipe by id:  
 ![request-response-example](doc/diagrams/sequence-flow/request-response.png)
+
+**Summary**:
+
+1. _Customer_ authenticates with _Auth_, which returns an token.
+1. _Customer_ sends a HTTP request to _ReverseProxy_ with a token from Auth.
+1. _ReverseProxy_ validates the token with _Auth_.
+1. _ReverseProxy_ sends a request event to _RequestHandler_.
+1. _RequestHandler_ create (or read) a recipe in _Storage_.
+1. _Requesthandler_ publishes logs and metrics to _Monitoring_.
+
+### Scalability
+
+> RPS - requests per second.
+
+I've used defaults in CDK, because I wanted to focus on development. Below is a strategy on how  
+to scale the service to accomodate based on type of workload.
+
+-   **Cognito** has quotas; depending on the workload (and security requirements),
+    we can adjust resources to handle the load: for example, we set a high value for the token expirity
+    to alleviate load on authenticated requests.
+-   **API Gateway** is scalable by design; we don't need to configure anything and it will handle any workload.
+-   **Lambda also** has quotas, but it can be scaled as needed in different ways. If the workload is unpredictable
+    we can use [on-demand scaling](https://docs.aws.amazon.com/lambda/latest/operatorguide/on-demand-scaling.html),  
+    if the workload is latency-sensitive, we can use [provisioned concurrency](https://docs.aws.amazon.com/lambda/latest/dg/provisioned-concurrency.html). We can go even further and put a queue in between _API Gateway_ and  
+    _Lambda_ to alleviate the load on _Lambda_. There are many options, such as SQS, SNS, Kinesis  
+    and Event Bridge. Depending on the workload and requirements, we evaluate which one(s) should be used.
+-   **DynamoDB** also has quotas, but is quite scalable. Additionally, it delivers low-latency performance at any scale.  
+    We can use [auto scaling](https://aws.amazon.com/blogs/database/amazon-dynamodb-auto-scaling-performance-and-cost-optimization-at-any-scale/) to scale reads and  
+    writes according to the workload.
 
 ### Packages
 
@@ -109,8 +135,7 @@ in the CDK package.
 
 ## Roadmap
 
-The list below provides an overview of what I think is the bare minimum to deploy this project
-to production. The items here were not implemented, some of them are from requirements (as optional).
+If I had more time, I'd implement the following before calling it production-ready:
 
 -   Functionality
     -   Add support to query recipes by fields other than id.
