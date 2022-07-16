@@ -144,6 +144,7 @@ If I had more time, I'd implement the following before calling it production-rea
     -   Add custom validation to models, such as min, max, etc.
     -   Expose OpenAPI specification in API Gateway.
 -   Development
+    -   Replace "sam local start-api" with local-stack and aws-cdk-local.
     -   Create a CI/CD pipeline.
         -   [Test] Add performance tests and run them as part of the pipeline.
         -   [Test] Add smoke tests and run them as part of the pipeline.
@@ -157,5 +158,4 @@ If I had more time, I'd implement the following before calling it production-rea
     -   Add business and operational dashboards.
     -   Add service-impairent runbooks to help troubleshoot, find root causes and mitigate them.
 -   Security
-    -   Add some kind of authentication (e.g. token).
     -   Run a thread model to capture security vulnerabilities.
