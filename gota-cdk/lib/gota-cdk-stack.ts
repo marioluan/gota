@@ -4,6 +4,10 @@ import * as dynamodb from 'aws-cdk-lib/aws-dynamodb'
 import * as lambda from 'aws-cdk-lib/aws-lambda'
 import { Construct } from 'constructs'
 
+/**
+ * This stack deploy an API with API Gateway as a reverse proxy,
+ * Lambda as a request handler and dynamodb as the storage layer.
+ */
 export class GotaCdkStack extends Stack {
     // XXX
     // In a production application, I'd make gota-core and gota-cdk two separate projects.

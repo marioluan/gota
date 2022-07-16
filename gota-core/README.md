@@ -4,15 +4,18 @@ Core library which implements an API to create, read and update recipes.
 
 ## Deployment modes
 
-The API is powered by [FastAPI](https://github.com/tiangolo/fastapi) and backed by [uvicorn ASGI web server](https://www.uvicorn.org/) and [Mangum adapter](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwjaub2VwPv4AhVDZMAKHUUSBUYQFnoECAYQAQ&url=https%3A%2F%2Fmangum.io%2Fasgi-frameworks%2F&usg=AOvVaw3tQnlYwMTQDxznwBSWkZiw).
+The API is powered by [FastAPI](https://github.com/tiangolo/fastapi). It supports OpenAPI and  
+can generate clients from the specification. Lastly, it supports many authentication mechanisms, such as JTW.  
+[Uvicorn](https://www.uvicorn.org/) is used to spin up a standalone web server (quite useful in tests).  
+To integrate with AWS, I'm using [Mangum](https://mangum.io/asgi-frameworks/) adapter.
 
-### Standalone: ASGI Web Server
+### Local ASGI Web Server
 
 ```bash
 docker compose up gota-core -d
 ```
 
-### Local AWS stack
+### Local AWS Stack
 
 Follow `Deploy -> Local -> Build & Run` in gota-cdk's README.md.
 

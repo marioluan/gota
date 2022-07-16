@@ -13,51 +13,66 @@ Infrastructure management for `gota-core`.
 
 ### Production
 
-Coming soon...
+**Pre-requisite**
+Valid aws credentials.
+
+```bash
+# run only if you'r running for the first time
+cdk bootstrap
+
+# run only if it's already deployed
+cdk diff
+
+# this is used all the time
+cdk deploy
+```
 
 ### Local
 
-We use `sam local` to [start a local instance of API Gateway](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-start-api.html) and integrate with our Lambda.
+We use `sam local` to [start a local instance of API Gateway](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-start-api.html) and integrate with our Lambda. The steps below will deploy  
+docker containers locally with an in-memory DynamoDB, API Gateway and Lambda.
 
-#### Build & Run
+> Read [this blog post](https://medium.com/@mahesh_61440/using-aws-cdk-to-quickly-create-a-proof-of-concept-dca2696fad77)  
+> to understand the integration between cdk and sam.
 
-The steps below will deploy docker containers for a local DynamoDB server, API Gateway and Lambda.
-Read [this blog post](https://medium.com/@mahesh_61440/using-aws-cdk-to-quickly-create-a-proof-of-concept-dca2696fad77)  
-to understand the integration between cdk and sam.
-
-1. Generate a cloudformation template from the cdk application:
-    ```bash
-    cdk synth --no-staging > "template.yaml"
-    ```
-1. Build a docker image from the cloudformation template:
-    ```bash
-    sam build
-    ```
 1. Start a local DynamoDB server:
 
     ```bash
     # dynamodb-local is the name of the service present on the docker-compose.yaml file
-    cd ../gota-core && docker compose up "dynamodb-local"
+    cd ../gota-core
+    docker compose up "dynamodb-local" -d
 
     # it should start running on http://localhost:8000, this is also configured
     # in the docker-compose.yaml file
     ```
 
-1. Create the recipes table in local DynamoDB server:
+1. Create the "Recipes" table in DynamoDB:
+
     ```bash
     # local dynamodb doesn't need real creds. region can be any. endpoint is from the previous
     # command [above]
-    AWS_ACCESS_KEY_ID='LEAVE_AS_IS' \
-    AWS_SECRET_ACCESS_KEY='LEAVE_AS_IS' \
-    REGION='us-east-1' \
-    ENDPOINT_URL="http://localhost:8000" \
+    export TABLE_NAME="Recipes" \
+    && export AWS_ACCESS_KEY_ID="LEAVE_AS_IS" \
+    && export AWS_SECRET_ACCESS_KEY="LEAVE_AS_IS" \
+    && export REGION="us-east-1" \
+    && export ENDPOINT_URL="http://localhost:8000"
     aws dynamodb create-table \
-        --table-name "Recipe" \
+        --table-name "${TABLE_NAME}" \
         --attribute-definitions "AttributeName=recipe_id,AttributeType=S" \
         --key-schema "AttributeName=recipe_id,KeyType=HASH" \
         --provisioned-throughput "ReadCapacityUnits=5,WriteCapacityUnits=5" \
         --region "${REGION}" \
         --endpoint-url "${ENDPOINT_URL}"
+    ```
+
+1. Generate a cloudformation template from the cdk application:
+    ```bash
+    cd ../gota-cdk
+    AWS_SAM_LOCAL="true" cdk synth --no-staging > "template.yaml"
+    ```
+1. Build a docker image from the cloudformation template:
+    ```bash
+    sam build
     ```
 1. Spin up an API Gateway integrated with gota API through Lambda:
     ```bash
@@ -70,12 +85,32 @@ to understand the integration between cdk and sam.
         --docker-network "sam-local"
     ```
 
-##### Test
+#### Test
 
 Now that the service is up and running, you can execute the command below to validate the
-api is working as expected:
+api is working as expected (or play with it as you wish):
 
 ```bash
-cd ../gota-core && pytest tests-integration
-cd ../gota-cdk
+cd ../gota-core
+pytest tests-integration
 ```
+
+#### Clean up
+
+1. Delete the Recipes table:
+    ```bash
+    export TABLE_NAME="Recipes" \
+    && export AWS_ACCESS_KEY_ID="LEAVE_AS_IS" \
+    && export AWS_SECRET_ACCESS_KEY="LEAVE_AS_IS" \
+    && export REGION="us-east-1" \
+    && export ENDPOINT_URL="http://localhost:8000"
+    aws dynamodb delete-table \
+        --table-name "${TABLE_NAME}" \
+        --endpoint-url "${ENDPOINT_URL}" \
+        --region "${REGION}"
+    ```
+1. Delete the local DynamoDB:
+    ```bash
+    cd ../gota-core
+    docker compose down "dynamodb-local"
+    ```
