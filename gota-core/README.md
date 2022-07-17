@@ -20,8 +20,9 @@ Go to `gota-cdk` and check the `Deploy > Local` section in its README.md file.
 
 **Pre-requisite**
 
--   [pip](https://github.com/pypa/pip)
 -   [python3](https://www.python.org/downloads/)
+-   [pip](https://github.com/pypa/pip)
+-   [pipenv](https://github.com/pypa/pipenv)
 -   [docker](https://docs.docker.com/get-docker/)
 
 ### Environment setup
@@ -30,18 +31,13 @@ Follow the steps below to prepare your local python environment, which will allo
 
 1. Create a virtualenv:
     ```bash
-    python3 -m venv env
-    . env/bin/activate
+    pipenv --python 3.8
+    pipenv shell
     ```
-1. Upgrade pip and setuptools:
+1. Install all dependencies (dev included):
     ```bash
-    python -m pip install --upgrade pip setuptools
+    pipenv install --dev
     ```
-1. Install dependencies and goto-core in editable mode:
-    ```bash
-    pip install -r requirements.txt && pip install -e .
-    ```
-1. That's it. You're ready to integrate your IDE, make code changes, test and spin up the web server.
 
 ## Testing
 
@@ -72,19 +68,15 @@ These are testing the api contract and the business logic in general. It spins u
 
 ## Format
 
-1. Install development dependencies:
-    ```bash
-    pip install -r "requirements-dev.txt"
-    ```
-1. Format the code:
+Format the code:
 
-    ```bash
-    FOLDERS="src tests tests-integration"
-    LINE_LENGTH="100"
+```bash
+FOLDERS="src tests tests-integration"
+LINE_LENGTH="100"
 
-    isort ${FOLDERS}
-    black --line-length "${LINE_LENGTH}" ${FOLDERS}
-    ```
+isort ${FOLDERS}
+black --line-length "${LINE_LENGTH}" ${FOLDERS}
+```
 
 ### Code Style
 
@@ -92,26 +84,6 @@ These are testing the api contract and the business logic in general. It spins u
 FOLDERS="src tests tests-integration"
 flake8 ${FOLDERS}
 ```
-
-## Adding a new python dependency
-
-1. Create a virtualenv:
-    ```bash
-    python3 -m venv env
-    . env/bin/activate
-    ```
-1. Install the dependency:
-    ```bash
-    pip3 install "{dependency}"
-    ```
-1. Remove gota-core from the dependency tree (which is only used for development):
-    ```bash
-    pip3 uninstall gota
-    ```
-1. Update requirements.txt:
-    ```bash
-    pip3 freeze > requirements.txt
-    ```
 
 ## Accessing the OpenAPI spec
 

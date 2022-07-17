@@ -1,0 +1,22 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+arrow = "*"
+boto3 = "*"
+pydantic = "*"
+fastapi = "*"
+mangum = "*"
+uvicorn = "*"
+
+[dev-packages]
+pytest = "*"
+black = "*"
+flake8 = "*"
+isort = "*"
+warrant = "*"
+
+[requires]
+python_version = "3.8"

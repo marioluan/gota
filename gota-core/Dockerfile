@@ -5,7 +5,9 @@ FROM public.ecr.aws/lambda/python:3.8
 ARG LAMBDA_TASK_ROOT="/var/task"
 
 # install dependencies
-COPY "requirements.txt"  .
+COPY "Pipfile.lock" .
+RUN pip3 install pipenv
+RUN pipenv requirements > "requirements.txt"
 RUN pip3 install -r "requirements.txt" --target "${LAMBDA_TASK_ROOT}"
 
 # application code is copied into the lambda filesystem
