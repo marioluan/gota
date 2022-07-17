@@ -76,11 +76,22 @@ These are testing the api contract and the business logic in general. It spins u
     ```bash
     pip install -r "requirements-dev.txt"
     ```
-1. Sort imports:
+1. Format the code:
+
     ```bash
     FOLDERS="src tests tests-integration"
+    LINE_LENGTH="100"
+
     isort ${FOLDERS}
+    black --line-length "${LINE_LENGTH}" ${FOLDERS}
     ```
+
+### Code Style
+
+```bash
+FOLDERS="src tests tests-integration"
+flake8 ${FOLDERS}
+```
 
 ## Adding a new python dependency
 
