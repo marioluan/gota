@@ -2,10 +2,11 @@ from os import environ
 from typing import List
 
 from fastapi import FastAPI, HTTPException
+from mangum import Mangum
+
 from gota.core.app import DynamoDBSettings, RecipeApp
 from gota.core.errors import RecipeNotFoundError
 from gota.core.models import Recipe
-from mangum import Mangum
 
 # this spins up the API
 # root_path is usually present when deployed to aws/api gateway

@@ -1,7 +1,8 @@
 from typing import List, Optional
 
-from gota.core.enums import Ingredient, IngredientQuantityUnit, RecipeDificulty, RecipeTool
 from pydantic import BaseModel
+
+from gota.core.enums import Ingredient, IngredientQuantityUnit, RecipeDificulty, RecipeTool
 
 # TODO: add custom validation/constraints to all models below
 

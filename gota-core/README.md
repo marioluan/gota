@@ -70,6 +70,18 @@ These are testing the api contract and the business logic in general. It spins u
     docker compose stop gota-core
     ```
 
+## Format
+
+1. Install development dependencies:
+    ```bash
+    pip install -r "requirements-dev.txt"
+    ```
+1. Sort imports:
+    ```bash
+    FOLDERS="src tests tests-integration"
+    isort ${FOLDERS}
+    ```
+
 ## Adding a new python dependency
 
 1. Create a virtualenv:
